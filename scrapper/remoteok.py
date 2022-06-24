@@ -3,7 +3,7 @@ from common import *
 from bs4 import BeautifulSoup
 
 
-remoteok_url = 'https://remoteok.com'
+remoteok_url = 'https://remoteok.com/'
 
 
 def get_remoteok_jobs(query):
@@ -15,4 +15,4 @@ def get_remoteok_jobs(query):
 
 
 # get_remoteok_jobs('python')
-print(requests.get(f'{remoteok_url}'))
+print(requests.get(f'{remoteok_url}').text)

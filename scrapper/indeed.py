@@ -18,11 +18,15 @@ def get_indeed_jobs(query):
         job = job.find('a', {'class': 'jcs-JobTitle'})
         title = clean_str(job.find('span').string)
         link = indeed_url + clean_str(job.get('href'))
-        result.append(','.join([company, title, link]))
+        result.append({
+            'company': company,
+            'title': title,
+            'link': link
+        })
     return result
 
 
 js = get_indeed_jobs('python')
-print(len(js))
+print('indeed', len(js), 'jobs')
 for j in js:
     print(j)
