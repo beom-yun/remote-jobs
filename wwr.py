@@ -3,24 +3,24 @@ from common import *
 from bs4 import BeautifulSoup
 
 
-baseUrl = 'https://weworkremotely.com'
+wwr_url = 'https://weworkremotely.com'
 
 
-def get_jobs(query):
+def get_wwr_jobs(query):
     result = []
-    html_doc = requests.get(f'{baseUrl}/remote-jobs/search?term={query}').text
+    query = clean_str(query.strip()).replace(' ', '+')
+    html_doc = requests.get(f'{wwr_url}/remote-jobs/search?term={query}').text
     soup = BeautifulSoup(html_doc, 'html.parser')
     jobs = soup.find_all('li', {'class': 'feature'})
     for job in jobs:
         company = clean_str(job.find('span', {'class': 'company'}).string)
         title = clean_str(job.find('span', {'class': 'title'}).string)
-        location = clean_str(
-            job.find('span', {'class': 'region company'}).string)
-        link = clean_str(baseUrl + job.find_all('a')[1].get('href'))
-        result.append(','.join([company, title, location, link]))
+        link = wwr_url + clean_str(job.find_all('a')[1].get('href'))
+        result.append(','.join([company, title, link]))
     return result
 
 
-for j in get_jobs('python'):
+js = get_wwr_jobs('python')
+print(len(js))
+for j in js:
     print(j)
-# print(clean_str('   sd s d     d   '))
