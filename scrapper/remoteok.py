@@ -4,6 +4,8 @@ from bs4 import BeautifulSoup
 
 
 remoteok_url = 'https://remoteok.com/'
+headers = {
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36'}
 
 
 def get_remoteok_jobs(query):
@@ -15,4 +17,5 @@ def get_remoteok_jobs(query):
 
 
 # get_remoteok_jobs('python')
-print(requests.get(f'{remoteok_url}').text)
+
+print(requests.get(remoteok_url, headers=headers))
