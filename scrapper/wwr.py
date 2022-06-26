@@ -25,9 +25,3 @@ def get_wwr_jobs(query):
         except:
             continue
     return result
-
-
-js = get_wwr_jobs('python')
-print('wwr', len(js), 'jobs')
-for j in js:
-    print(j)

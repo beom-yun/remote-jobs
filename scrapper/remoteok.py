@@ -29,9 +29,3 @@ def get_remoteok_jobs(query):
         except:
             continue
     return result
-
-
-js = get_remoteok_jobs('python')
-print('remoteok', len(js), 'jobs')
-for j in js:
-    print(j)

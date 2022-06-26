@@ -28,9 +28,3 @@ def get_indeed_jobs(query):
         except:
             continue
     return result
-
-
-js = get_indeed_jobs('python')
-print('indeed', len(js), 'jobs')
-for j in js:
-    print(j)

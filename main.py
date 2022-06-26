@@ -1,4 +1,6 @@
-from flask import Flask, render_template, request
+from common import clean_str
+from flask import Flask, redirect, render_template, request
+from scrap import get_all_jobs
 
 app = Flask("SuperScrapper")
 
@@ -10,7 +12,11 @@ def home():
 
 @app.route('/report')
 def report():
-    word = request.args.get('word').lower()
+    word = clean_str(request.args.get('word').lower())
+    if not word:
+        return redirect('/')
+    jobs = get_all_jobs(word)
+    print(len(jobs))
     return render_template("report.html", searching_by=word)
 
 
