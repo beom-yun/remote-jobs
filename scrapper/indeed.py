@@ -14,15 +14,19 @@ def get_indeed_jobs(query):
     soup = BeautifulSoup(html_doc, 'html.parser')
     jobs = soup.find_all('td', {'class': 'resultContent'})
     for job in jobs:
-        company = clean_str(job.find('span', {'class': 'companyName'}).string)
-        job = job.find('a', {'class': 'jcs-JobTitle'})
-        title = clean_str(job.find('span').string)
-        link = indeed_url + clean_str(job.get('href'))
-        result.append({
-            'company': company,
-            'title': title,
-            'link': link
-        })
+        try:
+            company = clean_str(
+                job.find('span', {'class': 'companyName'}).string)
+            job = job.find('a', {'class': 'jcs-JobTitle'})
+            title = clean_str(job.find('span').string)
+            link = indeed_url + clean_str(job.get('href'))
+            result.append({
+                'company': company,
+                'title': title,
+                'link': link
+            })
+        except:
+            continue
     return result
 
 

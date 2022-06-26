@@ -13,14 +13,17 @@ def get_wwr_jobs(query):
     soup = BeautifulSoup(html_doc, 'html.parser')
     jobs = soup.find_all('li', {'class': 'feature'})
     for job in jobs:
-        company = clean_str(job.find('span', {'class': 'company'}).string)
-        title = clean_str(job.find('span', {'class': 'title'}).string)
-        link = wwr_url + clean_str(job.find_all('a')[1].get('href'))
-        result.append({
-            'company': company,
-            'title': title,
-            'link': link
-        })
+        try:
+            company = clean_str(job.find('span', {'class': 'company'}).string)
+            title = clean_str(job.find('span', {'class': 'title'}).string)
+            link = wwr_url + clean_str(job.find_all('a')[1].get('href'))
+            result.append({
+                'company': company,
+                'title': title,
+                'link': link
+            })
+        except:
+            continue
     return result
 
 
