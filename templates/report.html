@@ -19,6 +19,8 @@
     Found {{len_indeed}} in indeed, {{len_remoteok}} in remoteok, {{len_wwr}} in
     wwr
 
+    <a href="/export?word={{searching_by}}">Export to CSV</a>
+
     <h3>Indeed</h3>
     <section>
       <h4>Title</h4>
@@ -27,7 +29,7 @@
       {% for job in jobs['indeed'] %}
       <span>{{job.title}}</span>
       <span>{{job.company}}</span>
-      <span>{{job.link}}</span>
+      <a href="{{job.link}}" target="_blank">Apply!</a>
       {% endfor %}
     </section>
 
@@ -39,7 +41,7 @@
       {% for job in jobs['remoteok'] %}
       <span>{{job.title}}</span>
       <span>{{job.company}}</span>
-      <span>{{job.link}}</span>
+      <a href="{{job.link}}" target="_blank">Apply!</a>
       {% endfor %}
     </section>
 
@@ -51,7 +53,7 @@
       {% for job in jobs['wwr'] %}
       <span>{{job.title}}</span>
       <span>{{job.company}}</span>
-      <span>{{job.link}}</span>
+      <a href="{{job.link}}" target="_blank">Apply!</a>
       {% endfor %}
     </section>
   </body>

@@ -1,6 +1,7 @@
-from common import clean_str
-from flask import Flask, redirect, render_template, request
+from common import clean_str, save_to_file
+from flask import Flask, redirect, render_template, request, send_file
 from scrap import get_all_jobs
+
 
 app = Flask("SuperScrapper")
 fake_db = dict()
@@ -31,6 +32,25 @@ def report():
         len_wwr=str(len(jobs['wwr'])),
         jobs=jobs
     )
+
+
+@app.route('/export')
+def export():
+    try:
+        word = clean_str(request.args.get('word').lower())
+        print('word', word)
+        if not word:
+            raise Exception()
+        jobs = []
+        for values in fake_db[word].values():
+            jobs += values
+        print('jobs', jobs)
+        if not jobs:
+            raise Exception()
+        save_to_file(jobs)
+        return send_file('jobs.csv', download_name='SearchingResult.csv', as_attachment=True)
+    except:
+        return redirect('/')
 
 
 app.run()
